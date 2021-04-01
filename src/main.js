@@ -16,9 +16,7 @@ var currentCover;
 
 changeCover();
 
-randomCoverButton.addEventListener('click', function (event) {
-  changeCover();
-});
+randomCoverButton.addEventListener('click', changeCover);
 
 // Create your event handlers and other functions here 👇
 
