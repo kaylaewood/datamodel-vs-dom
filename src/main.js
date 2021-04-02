@@ -26,7 +26,7 @@ var currentCover;
 changeCover();
 
 randomCoverButton.addEventListener('click', changeCover);
-makeCoverButton.addEventListener('click', toggleMakeCoverVisible);
+makeCoverButton.addEventListener('click', toggleMakeCoverView);
 
 // Create your event handlers and other functions here 👇
 
@@ -50,9 +50,12 @@ function changeCover() {
 //create a function that will toggle the home button, the main cover, the FORM
 //show new random cover and save cover
 
-function toggleMakeCoverVisible(){
+function toggleMakeCoverView(){
  homeButton.classList.remove("hidden");
-
+ saveCoverButton.classList.add("hidden");
+ randomCoverButton.classList.add("hidden");
+ form.classList.remove("hidden");
+ homeView.classList.add("hidden");
 }
 
 // We've provided one function to get you started
