@@ -69,16 +69,19 @@ function makeCoverView(){
  saveCoverPage.classList.add("hidden");
 }
 
-function savedCoverView(){
+function savedCoverView() {
   homeButton.classList.remove("hidden");
   randomCoverButton.classList.add("hidden");
   saveCoverButton.classList.add("hidden");
   saveCoverPage.classList.remove("hidden");
   homeView.classList.add("hidden");
   form.classList.add("hidden");
+  for (var i = 0; i < savedCovers.length; i++) {
+    //show the cover object at [i] in the saved covers view
+  }
 }
 
-function homePageView(){
+function homePageView() {
   homeButton.classList.add("hidden");
   saveCoverButton.classList.remove("hidden");
   randomCoverButton.classList.remove("hidden");
@@ -87,9 +90,7 @@ function homePageView(){
   form.classList.add("hidden");
 }
 
-//create a function that will take the value of each input form and save it to an array, create a new Cover, and display that cover
 function createNewBook() {
-  //take each value of each input form and save it
   var inputCover = userCover.value;
   var inputTitle = userTitle.value;
   var inputDesc1 = userDescriptor1.value;
