@@ -12,7 +12,11 @@ var homeButton = document.querySelector(".home-button");
 var viewSavedButton = document.querySelector(".view-saved-button");
 var saveCoverButton = document.querySelector(".save-cover-button");
 var saveCoverPage = document.querySelector(".saved-view");
-
+var userCover = document.querySelector(".user-cover");
+var userTitle = document.querySelector(".user-title");
+var userDescriptor1 = document.querySelector(".user-desc1");
+var userDescriptor2 = document.querySelector(".user-desc2");
+var createNewBookButton = document.querySelector(".create-new-book-button");
 
 // We've provided a few variables below
 var savedCovers = [
@@ -28,6 +32,11 @@ randomCoverButton.addEventListener("click", changeCover);
 makeCoverButton.addEventListener("click", makeCoverView);
 viewSavedButton.addEventListener("click", savedCoverView);
 homeButton.addEventListener("click", homePageView);
+//create an event listener on the Save Cover button
+createNewBookButton.addEventListener("click", function() {
+  createNewBook();
+  event.preventDefault();
+});
 
 // Create your event handlers and other functions here 👇
 
@@ -57,7 +66,7 @@ function makeCoverView(){
  randomCoverButton.classList.add("hidden");
  form.classList.remove("hidden");
  homeView.classList.add("hidden");
- saveCoverPage.clasList.add("hidden");
+ saveCoverPage.classList.add("hidden");
 }
 
 function savedCoverView(){
@@ -76,6 +85,21 @@ function homePageView(){
   homeView.classList.remove("hidden");
   saveCoverPage.classList.add("hidden");
   form.classList.add("hidden");
+}
+
+//create a function that will take the value of each input form and save it to an array, create a new Cover, and display that cover
+function createNewBook() {
+  //take each value of each input form and save it
+  var inputCover = userCover.value;
+  var inputTitle = userTitle.value;
+  var inputDesc1 = userDescriptor1.value;
+  var inputDesc2 = userDescriptor2.value;
+  covers.push(inputCover);
+  titles.push(inputTitle);
+  descriptors.push(inputDesc1);
+  descriptors.push(inputDesc2);
+  currentCover = new Cover(inputCover, inputTitle, inputDesc1, inputDesc2);
+  return currentCover;
 }
 
 // We've provided one function to get you started
