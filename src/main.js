@@ -32,11 +32,11 @@ randomCoverButton.addEventListener("click", changeCover);
 makeCoverButton.addEventListener("click", makeCoverView);
 viewSavedButton.addEventListener("click", savedCoverView);
 homeButton.addEventListener("click", homePageView);
-//create an event listener on the Save Cover button
 createNewBookButton.addEventListener("click", function() {
   createNewBook();
   event.preventDefault();
 });
+saveCoverButton.addEventListener("click", addCurrentCover);
 
 // Create your event handlers and other functions here 👇
 
@@ -105,6 +105,14 @@ function createNewBook() {
   bookTagline2.innerText = inputDesc2;
   homePageView();
   return currentCover;
+}
+
+function addCurrentCover() {
+  if (savedCovers.includes(currentCover)) {
+    return;
+  } else {
+    savedCovers.push(currentCover);
+  }
 }
 
 // We've provided one function to get you started
