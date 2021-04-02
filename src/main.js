@@ -99,6 +99,11 @@ function createNewBook() {
   descriptors.push(inputDesc1);
   descriptors.push(inputDesc2);
   currentCover = new Cover(inputCover, inputTitle, inputDesc1, inputDesc2);
+  bookCover.src = inputCover;
+  bookTitle.innerText = inputTitle;
+  bookTagline1.innerText = inputDesc1;
+  bookTagline2.innerText = inputDesc2;
+  homePageView();
   return currentCover;
 }
 
