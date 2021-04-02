@@ -12,6 +12,7 @@ var makeCoverButton = document.querySelector(".make-new-button");
 var form = document.querySelector(".form-view");
 var homeView = document.querySelector(".home-view");
 var homeButton = document.querySelector(".home-button");
+var viewSavedButton = document.querySelector(".view-saved-button");
 var saveCoverButton = document.querySelector(".save-cover-button");
 
 
@@ -25,8 +26,9 @@ var currentCover;
 
 changeCover();
 
-randomCoverButton.addEventListener('click', changeCover);
-makeCoverButton.addEventListener('click', makeCoverView);
+randomCoverButton.addEventListener("click", changeCover);
+makeCoverButton.addEventListener("click", makeCoverView);
+viewSavedButton.addEventListener("click", savedCoverView);
 
 // Create your event handlers and other functions here 👇
 
@@ -49,6 +51,7 @@ function changeCover() {
 }
 //create a function that will toggle the home button, the main cover, the FORM
 //show new random cover and save cover
+//note- for refactoring, toggle visibility with single function that takes parameter?
 
 function makeCoverView(){
  homeButton.classList.remove("hidden");
@@ -56,6 +59,13 @@ function makeCoverView(){
  randomCoverButton.classList.add("hidden");
  form.classList.remove("hidden");
  homeView.classList.add("hidden");
+}
+
+function savedCoverView(){
+  homeButton.classList.remove("hidden");
+  randomCoverButton.classList.add("hidden");
+  saveCoverButton.classList.add("hidden");
+
 }
 
 // We've provided one function to get you started
