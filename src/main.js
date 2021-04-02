@@ -5,6 +5,17 @@ var bookTitle = document.querySelector(".cover-title");
 var bookTagline1 = document.querySelector(".tagline-1");
 var bookTagline2 = document.querySelector(".tagline-2");
 var randomCoverButton = document.querySelector(".random-cover-button");
+//create a variable and grab the make your own cover button using querySelector
+//create a variable and grab the form Section
+//create a varibale andgrab the view home-view Section
+var makeCoverButton = document.querySelector(".make-new-button");
+var form = document.querySelector(".form-view");
+var homeView = document.querySelector(".home-view");
+var homeButton = document.querySelector(".home-button");
+var viewSavedButton = document.querySelector(".view-saved-button");
+var saveCoverButton = document.querySelector(".save-cover-button");
+var saveCoverPage = document.querySelector(".saved-view");
+
 
 // We've provided a few variables below
 var savedCovers = [
@@ -16,7 +27,10 @@ var currentCover;
 
 changeCover();
 
-randomCoverButton.addEventListener('click', changeCover);
+randomCoverButton.addEventListener("click", changeCover);
+makeCoverButton.addEventListener("click", makeCoverView);
+viewSavedButton.addEventListener("click", savedCoverView);
+homeButton.addEventListener("click", homePageView);
 
 // Create your event handlers and other functions here 👇
 
@@ -37,7 +51,36 @@ function changeCover() {
   currentCover = new Cover(newCover, newTitle, newDescriptor1, newDescriptor2);
   return currentCover;
 }
+//create a function that will toggle the home button, the main cover, the FORM
+//show new random cover and save cover
+//note- for refactoring, toggle visibility with single function that takes parameter?
 
+function makeCoverView(){
+ homeButton.classList.remove("hidden");
+ saveCoverButton.classList.add("hidden");
+ randomCoverButton.classList.add("hidden");
+ form.classList.remove("hidden");
+ homeView.classList.add("hidden");
+ saveCoverPage.clasList.add("hidden");
+}
+
+function savedCoverView(){
+  homeButton.classList.remove("hidden");
+  randomCoverButton.classList.add("hidden");
+  saveCoverButton.classList.add("hidden");
+  saveCoverPage.classList.remove("hidden");
+  homeView.classList.add("hidden");
+  form.classList.add("hidden");
+}
+
+function homePageView(){
+  homeButton.classList.add("hidden");
+  saveCoverButton.classList.remove("hidden");
+  randomCoverButton.classList.remove("hidden");
+  homeView.classList.remove("hidden");
+  saveCoverPage.classList.add("hidden");
+  form.classList.add("hidden");
+}
 // We've provided one function to get you started
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
