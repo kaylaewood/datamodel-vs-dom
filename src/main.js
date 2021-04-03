@@ -17,6 +17,7 @@ var userTitle = document.querySelector(".user-title");
 var userDescriptor1 = document.querySelector(".user-desc1");
 var userDescriptor2 = document.querySelector(".user-desc2");
 var createNewBookButton = document.querySelector(".create-new-book-button");
+var savedCoversSection = document.querySelector(".saved-covers-section");
 
 // We've provided a few variables below
 var savedCovers = [
@@ -76,9 +77,19 @@ function savedCoverView() {
   saveCoverPage.classList.remove("hidden");
   homeView.classList.add("hidden");
   form.classList.add("hidden");
+  createMiniCover();
+}
+
+function createMiniCover(){
   for (var i = 0; i < savedCovers.length; i++) {
-    //show the cover object at [i] in the saved covers view
+    var miniCovers =`<section class="mini-cover">
+      <img class="cover-image" src=${savedCovers[i].cover}>
+      <h2 class="cover-title">${savedCovers[i].title}</h2>
+      <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+    </section>`
+    savedCoversSection.insertAdjacentHTML("afterbegin", miniCovers);
   }
+    //show the cover object at [i] in the saved covers view
 }
 
 function homePageView() {
