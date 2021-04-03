@@ -38,7 +38,9 @@ createNewBookButton.addEventListener("click", function() {
   event.preventDefault();
 });
 saveCoverButton.addEventListener("click", addCurrentCover);
-
+savedCoversSection.addEventListener("dblclick", function(e){
+  deleteSavedCover(e)
+});
 // Create your event handlers and other functions here 👇
 
 function changeCover() {
@@ -81,9 +83,11 @@ function savedCoverView() {
 }
 
 function createMiniCover(){
+  savedCoversSection.innerHTML=``;
   for (var i = 0; i < savedCovers.length; i++) {
-    var miniCovers =`<section class="mini-cover">
-      <img class="cover-image" src=${savedCovers[i].cover}>
+    console.log(i);
+    var miniCovers =`<section class="mini-cover" id="${i}">
+      <img id="${i}" class="cover-image" src=${savedCovers[i].cover}>
       <h2 class="cover-title">${savedCovers[i].title}</h2>
       <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
     </section>`
@@ -127,6 +131,12 @@ function addCurrentCover() {
   }
 }
 
+function deleteSavedCover(e){
+console.log("e", e.target.id);
+savedCovers.splice(e.target.id,1);
+console.log(savedCovers);
+createMiniCover();
+}
 // We've provided one function to get you started
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
