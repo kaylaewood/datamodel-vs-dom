@@ -17,6 +17,7 @@ var userTitle = document.querySelector(".user-title");
 var userDescriptor1 = document.querySelector(".user-desc1");
 var userDescriptor2 = document.querySelector(".user-desc2");
 var createNewBookButton = document.querySelector(".create-new-book-button");
+var savedCoversSection = document.querySelector(".saved-covers-section");
 
 // We've provided a few variables below
 var savedCovers = [
@@ -32,11 +33,11 @@ randomCoverButton.addEventListener("click", changeCover);
 makeCoverButton.addEventListener("click", makeCoverView);
 viewSavedButton.addEventListener("click", savedCoverView);
 homeButton.addEventListener("click", homePageView);
-//create an event listener on the Save Cover button
 createNewBookButton.addEventListener("click", function() {
   createNewBook();
   event.preventDefault();
 });
+saveCoverButton.addEventListener("click", addCurrentCover);
 
 // Create your event handlers and other functions here 👇
 
@@ -69,16 +70,29 @@ function makeCoverView(){
  saveCoverPage.classList.add("hidden");
 }
 
-function savedCoverView(){
+function savedCoverView() {
   homeButton.classList.remove("hidden");
   randomCoverButton.classList.add("hidden");
   saveCoverButton.classList.add("hidden");
   saveCoverPage.classList.remove("hidden");
   homeView.classList.add("hidden");
   form.classList.add("hidden");
+  createMiniCover();
 }
 
-function homePageView(){
+function createMiniCover(){
+  for (var i = 0; i < savedCovers.length; i++) {
+    var miniCovers =`<section class="mini-cover">
+      <img class="cover-image" src=${savedCovers[i].cover}>
+      <h2 class="cover-title">${savedCovers[i].title}</h2>
+      <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+    </section>`
+    savedCoversSection.insertAdjacentHTML("afterbegin", miniCovers);
+  }
+    //show the cover object at [i] in the saved covers view
+}
+
+function homePageView() {
   homeButton.classList.add("hidden");
   saveCoverButton.classList.remove("hidden");
   randomCoverButton.classList.remove("hidden");
@@ -87,9 +101,7 @@ function homePageView(){
   form.classList.add("hidden");
 }
 
-//create a function that will take the value of each input form and save it to an array, create a new Cover, and display that cover
 function createNewBook() {
-  //take each value of each input form and save it
   var inputCover = userCover.value;
   var inputTitle = userTitle.value;
   var inputDesc1 = userDescriptor1.value;
@@ -105,6 +117,14 @@ function createNewBook() {
   bookTagline2.innerText = inputDesc2;
   homePageView();
   return currentCover;
+}
+
+function addCurrentCover() {
+  if (savedCovers.includes(currentCover)) {
+    return;
+  } else {
+    savedCovers.push(currentCover);
+  }
 }
 
 // We've provided one function to get you started
