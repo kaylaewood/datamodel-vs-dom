@@ -40,7 +40,7 @@ createNewBookButton.addEventListener("click", function() {
 });
 saveCoverButton.addEventListener("click", addCurrentCover);
 savedCoversSection.addEventListener("dblclick", function(e) {
-  deleteSavedCover(e)
+  deleteSavedCover(e);
 });
 
 // Create your event handlers and other functions here 👇
