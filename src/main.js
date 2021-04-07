@@ -47,7 +47,7 @@ function getRandomIndex(array) {
 
 // 1. What represents the data model in this section of the code?
 // 2. Currently, are we updating the data model when a random poster is created?
-// 3. Currently, are we updatig the DOM using the data model?
+// 3. Currently, are we updating the DOM using the data model?
 // 4. What changes should we make?
 
 
@@ -87,7 +87,7 @@ function createNewBook() {
 
 // 1. What represents the data model in this section of the code?
 // 2. Currently, are we updating the data model when a poster is created?
-// 3. Currently, are we updatig the DOM using the data model?
+// 3. Currently, are we updating the DOM using the data model?
 // 4. What changes should we make? (HINT: Is there an existing function we can reuse here?)
 
 
@@ -120,7 +120,7 @@ function saveCurrentCover() {
 
 // 1. What represents the data model in this section of the code?
 // 2. Currently, are we updating the data model when a poster is saved?
-// 3. Currently, are we updatig the DOM using the data model?
+// 3. Currently, are we updating the DOM using the data model?
 // 4. What changes should we make?
 
 
@@ -143,7 +143,7 @@ function deleteSavedCover(e) {
 
 // 1. What represents the data model in this section of the code?
 // 2. Currently, are we updating the data model when a poster is deleted?
-// 3. Currently, are we updatig the DOM using the data model?
+// 3. Currently, are we updating the DOM using the data model?
 // 4. What changes should we make? (HINT: Is there an existing function we can reuse here?)
 
 
