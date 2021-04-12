@@ -22,11 +22,16 @@ var currentCover;
 
 // PART 1: DISPLAYING ONE RANDOM COVER
 
-window.addEventListener("load", changeCover);
+window.addEventListener("load", changeRandomCover);
 
-randomCoverButton.addEventListener("click", changeCover);
+randomCoverButton.addEventListener("click", changeRandomCover);
 
-function changeCover() {
+function changeRandomCover() {
+  makeRandomCover();
+  displayCover();
+}
+
+function makeRandomCover() {
   var newCover = covers[getRandomIndex(covers)];
   var newTitle = titles[getRandomIndex(titles)];
   var newDescriptor1 = descriptors[getRandomIndex(descriptors)];
@@ -34,11 +39,15 @@ function changeCover() {
   if (newDescriptor1 === newDescriptor2) {
     newDescriptor2 = descriptors[getRandomIndex(descriptors)];
   }
-  bookCover.src = newCover;
-  bookTitle.innerText = newTitle;
-  bookTagline1.innerText = newDescriptor1;
-  bookTagline2.innerText = newDescriptor2;
+
   currentCover = new Cover(newCover, newTitle, newDescriptor1, newDescriptor2);
+}
+
+function displayCover() {
+  bookCover.src = currentCover.cover;
+  bookTitle.innerText = currentCover.title;
+  bookTagline1.innerText = currentCover.tagline1;
+  bookTagline2.innerText = currentCover.tagline2;
 }
 
 function getRandomIndex(array) {
@@ -46,8 +55,12 @@ function getRandomIndex(array) {
 }
 
 // 1. What represents the data model in this section of the code?
+    // the data arrays: covers, titles, descriptors (accessing)
+    // currentCover (updating)
 // 2. Currently, are we updating the data model when a random poster is created?
+    // YES - line 41
 // 3. Currently, are we updating the DOM using the data model?
+    // YES - using currentCover's properties to render DOM elements
 // 4. What changes should we make?
 
 
@@ -66,6 +79,7 @@ createNewBookButton.addEventListener("click", createNewBook);
 function createNewBook() {
   event.preventDefault();
 
+  //updating data model:
   var inputCover = userCover.value;
   var inputTitle = userTitle.value;
   var inputDesc1 = userDescriptor1.value;
@@ -77,15 +91,14 @@ function createNewBook() {
 
   currentCover = new Cover(inputCover, inputTitle, inputDesc1, inputDesc2);
 
-  bookCover.src = inputCover;
-  bookTitle.innerText = inputTitle;
-  bookTagline1.innerText = inputDesc1;
-  bookTagline2.innerText = inputDesc2;
-
+  // updating DOM:
+  displayCover();
   displayHomePage();
 }
 
 // 1. What represents the data model in this section of the code?
+  // covers, titles, descriptors
+  // currentCover
 // 2. Currently, are we updating the data model when a poster is created?
 // 3. Currently, are we updating the DOM using the data model?
 // 4. What changes should we make? (HINT: Is there an existing function we can reuse here?)
@@ -105,21 +118,34 @@ saveCoverButton.addEventListener("click", saveCurrentCover);
 
 function saveCurrentCover() {
   if (!savedCovers.includes(currentCover)) {
+    //updating data model:
     savedCovers.push(currentCover);
+  }
 
+  displaySavedCovers();
+}
+
+function displaySavedCovers() {
+  //updating the DOM:
+  savedCoversSection.innerHTML = '';
+
+  for (var i = 0; i < savedCovers.length; i++) {
     savedCoversSection.innerHTML +=
     `
-    <section class="mini-cover" id="${savedCovers.length}">
-      <img class="cover-image" src=${currentCover.cover}>
-      <h2 class="cover-title">${currentCover.title}</h2>
-      <h3 class="tagline">A tale of <span class="tagline-1">${currentCover.tagline1}</span> and <span class="tagline-2">${currentCover.tagline2}</span></h3>
+    <section class="mini-cover" id="${savedCovers[i].id}">
+      <img class="cover-image" src=${savedCovers[i].cover}>
+      <h2 class="cover-title">${savedCovers[i].title}</h2>
+      <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
     </section>
     `
   }
 }
 
 // 1. What represents the data model in this section of the code?
+    // savedCovers (updating)
+    // currentCover (accessing)
 // 2. Currently, are we updating the data model when a poster is saved?
+  // YES - line 121
 // 3. Currently, are we updating the DOM using the data model?
 // 4. What changes should we make?
 
@@ -133,12 +159,21 @@ function saveCurrentCover() {
 
 // PART 4: DELETING COVERS
 
-savedCoversSection.addEventListener("dblclick", function(e) {
-  deleteSavedCover(e);
+savedCoversSection.addEventListener("dblclick", function(event) {
+  deleteSavedCover(event);
 });
 
 function deleteSavedCover(e) {
-  e.target.closest('section').remove();
+  // update data model:
+  console.log('lansmlfmas');
+  for (var i = 0; i < savedCovers.length; i++) {
+    if (parseInt(e.target.closest('section').id) === savedCovers[i].id) {
+      savedCovers.splice(i, 1);
+    }
+  }
+
+  // update DOM:
+  displaySavedCovers();
 }
 
 // 1. What represents the data model in this section of the code?
@@ -157,13 +192,13 @@ function deleteSavedCover(e) {
 
 // CHANGING VIEWS (not concerned about this in this lesson!)
 
-viewSavedButton.addEventListener("click", displaySavedCovers);
+viewSavedButton.addEventListener("click", displaySavedView);
 
 makeCoverButton.addEventListener("click", displayForm);
 
 homeButton.addEventListener("click", displayHomePage);
 
-function displaySavedCovers() {
+function displaySavedView() {
   homeButton.classList.remove("hidden");
   saveCoverPage.classList.remove("hidden");
   randomCoverButton.classList.add("hidden");
