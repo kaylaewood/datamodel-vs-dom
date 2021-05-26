@@ -31,13 +31,16 @@ function changeCover() {
   var newTitle = titles[getRandomIndex(titles)];
   var newDescriptor1 = descriptors[getRandomIndex(descriptors)];
   var newDescriptor2 = descriptors[getRandomIndex(descriptors)];
+
   if (newDescriptor1 === newDescriptor2) {
     newDescriptor2 = descriptors[getRandomIndex(descriptors)];
   }
+
   bookCover.src = newCover;
   bookTitle.innerText = newTitle;
   bookTagline1.innerText = newDescriptor1;
   bookTagline2.innerText = newDescriptor2;
+  
   currentCover = new Cover(newCover, newTitle, newDescriptor1, newDescriptor2);
 }
 
